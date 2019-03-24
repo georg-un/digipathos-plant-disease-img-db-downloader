@@ -1,6 +1,8 @@
 # Digipathos Plant Disease Image Database Downloader
 This project is a downloader for the plant disease image database provided by EMBRAPA (Brazilian Agricultural Research Corporation). Further information on the database can be found in [this](https://doi.org/10.1016/j.biosystemseng.2018.05.013) paper.
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/70ab11e8a9284cac8abdac662facb22f)](https://www.codacy.com/app/georg-un/embrapa-plant-disease-img-db-downloader?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=georg-un/embrapa-plant-disease-img-db-downloader&amp;utm_campaign=Badge_Grade)
+
 ## Requirements
 You will need **python 3.6 or higher** installed.
 Additionally, you will need the python module *requests*. If you haven't already installed it, install it with `pip install requests`.
