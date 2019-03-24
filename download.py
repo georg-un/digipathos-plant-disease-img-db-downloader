@@ -7,7 +7,7 @@ import shutil
 BASE_URL = "https://www.digipathos-rep.cnptia.embrapa.br"
 LIST_URL = BASE_URL + "/jspui/zipsincollection/123456789/3"
 
-WORKING_DIR = "/home/georg/test"
+WORKING_DIR = os.getcwd()
 DATA_DIR = WORKING_DIR + "/plant-disease-db"
 TMP_DIR = DATA_DIR + "/tmp"
 
@@ -33,7 +33,7 @@ def create_basic_folder_structure(verbose):
 def fetch_zips_table(name_filter, verbose):
     if verbose:
         print("Downloading table containing remote image DB information...")
-    query_params = {"offset": 0, "limit": 2}
+    query_params = {"offset": 0, "limit": 100000}
     try:
         response = requests.get(LIST_URL, query_params).json()
     except requests.exceptions.RequestException as e:
@@ -129,20 +129,3 @@ def main(name_filter, verbose):
     remove_tmp_dir()
     if verbose:
         print("All done. Have fun!")
-
-
-if __name__ == "__main__":
-    # Check python version
-    print(sys.version_info)
-    if sys.version_info < (3, 6):
-        print("Python version 3.6 or higher is required to run this script.")
-        sys.exit(1)
-
-    # Get command line args
-    if len(sys.argv) >= 2:
-        name_filter = str(sys.argv[1])
-    else:
-        name_filter = "all"
-
-    # Run main function
-    main(name_filter, True)
