@@ -2,19 +2,19 @@
 This project is a downloader for the plant disease image database provided by EMBRAPA (Brazilian Agricultural Research Corporation). Further information on the database can be found in [this](https://doi.org/10.1016/j.biosystemseng.2018.05.013) paper.
 
 ## Requirements
-You will need python 3.6 or higher installed.
+You will need **python 3.6 or higher** installed.
 Additionally, you will need the python module *requests*. If you haven't already installed it, install it with `pip install requests`.
 
 ## Installation
 With [git](https://git-scm.com/downloads) installed, you can install the downloader with:
-```
+```shell
 git clone https://github.com/georg-un/digipathos-plant-disease-img-db-downloader
 cd digipathos-plant-disease-img-db-downloader
 ```
 
 ## Usage
 To use the downloader, open a terminal in the project folder and run the following command:
-```
+```shell
 python3.6 run.py
 ```
 
