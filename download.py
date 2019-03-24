@@ -54,16 +54,30 @@ def fetch_zips_table(name_filter, verbose):
 
 
 def download_zip(relative_url, zip_name):
-    response = requests.get(BASE_URL + relative_url)
-    if not response.ok:
-        print(f"Error while downloading {zip_name}. Please try to download it manually: {BASE_URL + relative_url}")
-    else:
+    attempts = 0
+    max_attempts = 3
+    while attempts < max_attempts:
+        try:
+            response = requests.get(BASE_URL + relative_url)
+            if not response.ok:
+                print(f"Error while downloading {zip_name}.\Retrying...")
+                attempts += 1
+            else:
+                break
+        except requests.exceptions.RequestException:
+            print(f"Error while downloading {zip_name}.\nRetrying...")
+            attempts += 1
+
+    if attempts < max_attempts:
         filename = TMP_DIR + "/" + zip_name
         try:
             open(filename, "wb").write(response.content)
         except EnvironmentError as e:
-            print(f"{e}\nFailed to write {zip_name} to {TMP_DIR}"
+            print(f"{e}\nFailed to write {zip_name} to {TMP_DIR}\n"
                   f"Please try to download it manually: {BASE_URL + relative_url}")
+    else:
+        print(f"{e}\nFailed to download {zip_name}\n"
+              f"Please try to download it manually: {BASE_URL + relative_url}")
 
 
 def download_zips(zips_tbl, verbose):
