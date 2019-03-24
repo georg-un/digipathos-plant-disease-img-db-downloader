@@ -9,7 +9,7 @@ LIST_URL = BASE_URL + "/jspui/zipsincollection/123456789/3"
 
 WORKING_DIR = os.getcwd()
 DATA_DIR = WORKING_DIR + "/plant-disease-db"
-TMP_DIR = DATA_DIR + "/tmp"
+TMP_DIR = DATA_DIR + "/tmp/"
 
 
 def create_dir(path):
@@ -69,7 +69,7 @@ def download_zip(relative_url, zip_name):
             attempts += 1
 
     if attempts < max_attempts:
-        filename = TMP_DIR + "/" + zip_name
+        filename = TMP_DIR + zip_name
         try:
             open(filename, "wb").write(response.content)
         except EnvironmentError as e:
@@ -95,7 +95,7 @@ def validate_downloads(n_zips, verbose):
         print(f"WARNING: Number of ZIP-files in {TMP_DIR} is not the same as retrieved from the EMPRABA website.\n"
               f"Expected number of ZIP-files: {n_zips}. ZIP-files found in directory: {n_zips_in_tmp}.")
     for filename in os.listdir(TMP_DIR):
-        if os.path.getsize(TMP_DIR + "/" + filename) == 0:
+        if os.path.getsize(TMP_DIR + filename) == 0:
             print(f"WARNING: ZIP-file {filename} has a size of 0 bytes.")
 
 
@@ -103,7 +103,7 @@ def unpack_zip(filename):
     class_dir = DATA_DIR + "/" + filename[:-4]
     try:
         create_dir(class_dir)
-        with zipfile.ZipFile(TMP_DIR + "/" + filename, mode="r") as zip_contents:
+        with zipfile.ZipFile(TMP_DIR + filename, mode="r") as zip_contents:
             zip_contents.extractall(class_dir)
     except IOError as e:
         print(f"{e}\nSkipping unpacking of {filename}")
